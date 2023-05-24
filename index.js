@@ -53,14 +53,14 @@ const generate = async () => {
       if (done) break;
 
       const decodedValue = decoder.decode(value);
-      const individualResponse = decodedValue.split("\n");
-      const parsedResponse = individualResponse.map(
+      const individualResponses = decodedValue.split("\n");
+      const parsedResponses = individualResponses.map(
         response => response.replace(/^data: /, "").trim()
       )
         .filter(response => response !== "" && response !== "[DONE]")
         .map(response => JSON.parse(response));
 
-      for (const response of parsedResponse) {
+      for (const response of parsedResponses) {
         const { choices } = response;
         const { delta } = choices[0];
         const { content } = delta;
